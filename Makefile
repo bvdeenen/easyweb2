@@ -1,6 +1,8 @@
 INCLUDE=/usr/msp430/
 CC=msp430-gcc
-CFLAGS=-std=gnu99 -W -Os -g -mmcu=msp430x149 
+LD=msp430-ld
+AR=msp430-ar
+CFLAGS= -std=gnu99 -W -Os -g -mmcu=msp430f149 
 	# -pedantic -Wall
 
 OBJ_FILES=\
@@ -17,7 +19,7 @@ ${TARGET}.elf : ${OBJ_FILES}	 Makefile
 	-o $@
 
 install: ${TARGET}.elf
-	msp430-jtag -mpvr $<
+	sudo mspdebug -j olimex "prog $<"
 
 clean:
 	-rm *.elf
